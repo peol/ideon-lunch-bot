@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="lt-ie9" lang="sv"><![endif]-->
+<!--[if IE 9]><html class="ie9 lt-ie9" lang="sv"><![endif]-->
+<!--[if gt IE 9]><!--> <html class="" lang="sv"><!--<![endif]-->
+
+<head>
+	<meta charset="utf-8" /><script type="text/javascript">window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var o=n[t]={exports:{}};e[t][0].call(o.exports,function(n){var o=e[t][1][n];return r(o||n)},o,o.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<t.length;o++)r(t[o]);return r}({1:[function(e,n,t){function r(){}function o(e,n,t){return function(){return i(e,[c.now()].concat(u(arguments)),n?null:this,t),n?void 0:this}}var i=e("handle"),a=e(3),u=e(4),f=e("ee").get("tracer"),c=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(e,n){s[n]=o(d+n,!0,"api")}),s.addPageAction=o(d+"addPageAction",!0),s.setCurrentRouteName=o(d+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,o="function"==typeof n;return i(l+"tracer",[c.now(),e,t],r),function(){if(f.emit((o?"":"no-")+"fn-start",[c.now(),r,o],t),o)try{return n.apply(this,arguments)}catch(e){throw f.emit("fn-err",[arguments,this,e],t),e}finally{f.emit("fn-end",[c.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=o(l+n)}),newrelic.noticeError=function(e){"string"==typeof e&&(e=new Error(e)),i("err",[e,c.now()])}},{}],2:[function(e,n,t){function r(e,n){if(!o)return!1;if(e!==o)return!1;if(!n)return!0;if(!i)return!1;for(var t=i.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var o=null,i=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var u=navigator.userAgent,f=u.match(a);f&&u.indexOf("Chrome")===-1&&u.indexOf("Chromium")===-1&&(o="Safari",i=f[1])}n.exports={agent:o,version:i,match:r}},{}],3:[function(e,n,t){function r(e,n){var t=[],r="",i=0;for(r in e)o.call(e,r)&&(t[i]=n(r,e[r]),i+=1);return t}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],4:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,o=t-n||0,i=Array(o<0?0:o);++r<o;)i[r]=e[n+r];return i}n.exports=r},{}],5:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function o(e){function n(e){return e&&e instanceof r?e:e?f(e,u,i):i()}function t(t,r,o,i){if(!d.aborted||i){e&&e(t,r,o);for(var a=n(o),u=v(t),f=u.length,c=0;c<f;c++)u[c].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function l(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||o(t)}function w(e,n){c(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:l,addEventListener:l,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function i(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var u="nr@context",f=e("gos"),c=e(3),s={},p={},d=n.exports=o();d.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(o.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){o.buffer([e],r),o.emit(e,n,t)}var o=e("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!E++){var e=x.info=NREUM.info,n=l.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();c(y,function(n,t){e[n]||(e[n]=t)}),f("mark",["onload",a()+x.offset],null,"api");var t=l.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function o(){"complete"===l.readyState&&i()}function i(){f("mark",["domContent",a()+x.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(u=Math.max((new Date).getTime(),u))-x.offset}var u=(new Date).getTime(),f=e("handle"),c=e(3),s=e("ee"),p=e(2),d=window,l=d.document,m="addEventListener",v="attachEvent",g=d.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:d.setImmediate,CT:clearTimeout,XHR:g,REQ:d.Request,EV:d.Event,PR:d.Promise,MO:d.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1099.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),x=n.exports={offset:u,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),l[m]?(l[m]("DOMContentLoaded",i,!1),d[m]("load",r,!1)):(l[v]("onreadystatechange",o),d[v]("onload",r)),f("mark",["firstbyte",u],null,"api");var E=0,O=e(5)},{}]},{},["loader"]);</script>
+
+	<base href="http://restaurangedison.se/" />
+	<title>Lunch i Lund - Restaurang Edison</title>
+    
+    
+
+    
+    <meta property="og:title" content="Lunch i Lund - Restaurang Edison" />
+
+    
+    <meta property="og:type" content="website" />
+
+    <meta property="og:url" content="http://restaurangedison.se/lunch" />
+
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+				<script>
+				  WebFont.load({
+					google: {
+					  families: ['Open+Sans:400,600,300', 'Raleway:400,200,600', 'Roboto:100,300,400,500']
+					}
+				  });
+				</script>
+			
+
+	<!-- Page snippets CSS -->
+	
+		<link rel="stylesheet" type="text/css" media="only screen and (min-width: 768px)" href="/pages2/studio/snippets.css?page_id=14" />
+	
+	<!--[if lte IE 8]>
+		<link rel="stylesheet" type="text/css" media="all" href="/pages2/studio/snippets.css?page_id=14" />
+	<![endif]-->
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" type="text/css" media="all" href="/themes/inspire/public/styles/bootstrap.min.css?t=nlgcfd" />
+	<link rel="stylesheet" type="text/css" media="all" href="/themes/inspire/public/styles/bootstrap-theme.min.css?t=nlgcfd" />
+
+	<!-- Theme CSS -->
+	
+	<link rel="stylesheet" type="text/css" media="all" href="/sass-generated/themes/inspire/public/styles/scss/main.css?t=pglhyr" />
+
+	<!-- UI Design mod -->
+	<link rel="stylesheet" type="text/css" media="all" href="/accounts/15743/modules/design/system/published.css?t=pihu8r" />
+
+	<!-- Font awesome -->
+	<link rel="stylesheet" type="text/css" media="all" href="/themes/inspire/public/fonts/fontawesome/css/font-awesome-4.6.3.min.css?t=odyjjp" />
+
+	<!-- Magnific popup -->
+	<link rel="stylesheet" type="text/css" media="all" href="/themes/inspire/public/js/vendor/magnific-popup/magnific-popup.css?t=nty7ud" />
+
+	<meta name="generator" content="Snowfire">
+
+	<!-- <link rel="stylesheet" type="text/css" media="all" href="/sass-generated/themes/original/public/styles/scss/additiv.css?t=n5o030" /> -->
+
+	<script type="text/javascript" src="/themes/original/public/js/vendor/jquery/jquery.js?t=mzcklx"></script>
+
+	
+<link rel="stylesheet" type="text/css" media="all" href="/sass-generated/themes/inspire/public/styles/scss/styles/movement/movement.css?t=ol5toe" />
+<link rel="stylesheet" type="text/css" media="all" href="/accounts/15743/modules/design/user/editor.css?t=ow63on" />
+ <link rel="icon" type="image/png" href="accounts/15743/modules/account/icons/favicon.png" sizes="16x16" />
+ <link rel="apple-touch-icon" sizes="152x152" href="accounts/15743/modules/account/icons/favicon-ios.png" />
+<meta name="generator" content="Snowfire" />
+
+	
+	<link rel="stylesheet" type="text/css" media="all" href="https://d29ly7uq16xz5t.cloudfront.net/editor/dist/15743/css/style.css?t=1522928454" />
+	
+<script type="text/javascript" src="/js/obfuscate.js?t=mbmo9q"></script>
+</head>
+<body>
+
+	
+
+	<!-- ### -->
+<a name="section14" class="sectionSeparator"></a>
+<!-- This comment is required to make the parser work -->
+<script>
+    /* ---- Dropdown ------ */
+    $(function(){
+
+        var t;
+        var timers = [];
+
+        function setDropdownListeners() {
+
+            $('.has_dropdown').mouseover(
+                    function(){
+
+                        timerStop();
+
+                        // Clear siblings
+                        $(this).siblings().removeClass('hover');
+                        $(this).siblings().find('ul li').each(function(){
+                            $(this).removeClass('hover');
+                        })
+
+                        $(this).addClass("hover");
+
+                    }
+            );
+
+            $('.inline-menu ul').mouseleave(function(){
+                timerStart();
+            });
+
+            function timerStop(){
+                for(var i=0; i<timers.length; i++){
+                    clearTimeout(timers[i]);
+                }
+            }
+
+            function timerStart(){
+                var t = setTimeout(clearHoverStates, 500);
+                timers.push(t);
+            }
+
+            function clearHoverStates(){
+                $('li').each(function(){
+                    $(this).removeClass('hover');
+                });
+            }
+
+        }
+
+        setDropdownListeners();
+
+    });
+
+    /* ---- END: Dropdown ------ */
+
+</script>
+
+<!-- Dropdown top -->
+
+<div class="top-menu-wrapper">
+    <header class="container top-menu component-dropdown">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="tbl">
+                    <div id="logo-wrapper">
+                        <div id="logo">
+                            <div class="inner">	<a href="/" class="image-logo design_studio_element">
+		<img src="/accounts/15743/modules/design/system/header/logo.jpg?t=1542719835" alt="Edison ny" />
+	</a>
+
+
+</div>
+                        </div>
+                    </div>
+                </div>
+
+                <nav class="inline-menu">
+                    <ul><li ><a href="./">Hem</a></li><li class="active activeRoot"><a href="lunch">Lunch</a></li><li ><a href="café">Caf&eacute;</a></li><li ><a href="catering">Catering</a></li><li ><a href="konferens">Konferens</a></li><li ><a href="event-aktiviteter">Event &amp; Aktiviteter</a></li><li ><a href="om-oss">Om oss</a></li><li ><a href="kontakt">Kontakt</a></li></ul>
+                </nav>
+
+                <div class="open-menu-btn sf-bar-menu-button-right">
+                    <a>Menu</a>
+                </div>
+
+                <nav id="drawer-right" class="sf-drawer sf-drawer-right sf-drawer-closed drawer-navigation nav-right">
+                    <div class="inside">
+
+                        <a class="close-nav"></a>
+
+                        <div class="clearfix"></div>
+
+                        <ul>
+                            <li >
+                                <a href="./">
+                                    Hem
+                                </a>
+                            </li>
+                            
+                            <li class="active activeRoot">
+                                <a href="lunch">
+                                    Lunch
+                                </a>
+                            </li>
+                            
+                            <li >
+                                <a href="café">
+                                    Caf&eacute;
+                                </a>
+                            </li>
+                            
+                            <li >
+                                <a href="catering">
+                                    Catering
+                                </a>
+                            </li>
+                            
+                            <li >
+                                <a href="konferens">
+                                    Konferens
+                                </a>
+                            </li>
+                            
+                            <li >
+                                <a href="event-aktiviteter">
+                                    Event &amp; Aktiviteter
+                                </a>
+                            </li>
+                            
+                            <li >
+                                <a href="om-oss">
+                                    Om oss
+                                </a>
+                            </li>
+                            
+                            <li >
+                                <a href="kontakt">
+                                    Kontakt
+                                </a>
+                            </li>
+                            </ul>
+
+                    </div>
+                </nav>
+
+            </div>
+        </div>
+    </header>
+</div>
+
+<!-- END: drop-down top -->
+
+
+
+
+<div class="snippet_area snippet_area_main" data-snippetarea="main">
+	<div class="one columns wide-image-textbox-left one_wide-image-textbox-left">
+		<div class="column column0 wide-image-textbox-left" data-snippet="40"><div class="wide-image-textblock-left-wrapper">     <div class="wide-image-textblock-left-image">         <figure widht="1920" style="background-image:url(http://static1.snowfire.io/main/image/resize?file=accounts%2F15743%2Ffiles%2F109.jpg&amp;t=p5jb1v&amp;method=crop&amp;crop%5Bx%5D=0&amp;crop%5By%5D=0&amp;crop%5Bwidth%5D=2000&amp;crop%5Bheight%5D=1469&amp;max_width=2000)"></figure>             </div>          <div class="container">         <div class="wide-image-textblock-left-content">             <h2>Klassisk lunch – med mer smak</h2>                          <p>Sugen p&aring; klassisk lunch? Husmanskost, asiatiskt, vegetariskt &ndash; eller mat fr&aring;n andra sidan jordklotet? Vill du prova n&aring;t nytt eller prova n&aring;t gammalt p&aring; nytt?</p>
+<p>V&aring;rt koncept &auml;r n&auml;mligen att fr&aring;n grunden erbjuda traditionella luncher, komponerat med fantasirika smaker och influenser h&auml;mtade fr&aring;n v&auml;rldens alla h&ouml;rn! Vi erbjuder alltid tre olika dagens, som h&auml;mtar inspiration fr&aring;n v&auml;rldens alla h&ouml;rn. Alltid med ett vegetariskt alternativ. Vi serverar klassiska ingredienser och luncher kryddat med nya matinfluenser som bokstavligen ger mersmak!</p>                          <span class="sf-btn"></span>         </div>     </div> </div></div>
+	</div>
+</div>
+
+
+<div class="container menu">
+
+	<div class="row">
+
+		<div class="col-md-12">
+
+			<section>
+				
+			    <h2 class="week_number">Vecka 8</h2>
+			    
+			
+    		    <div id="monday">
+        				<h3>
+        					Måndag
+        				</h3>
+    					<table>
+    						<tr>
+    							<td class="course_type"><p>Green (Veg)</p></td>
+    							<td class="course_description"><p>Pasta Carbonara (Veg) med r&ouml;kt morot, broccoli &amp; 63graders &auml;gg</p></td>
+    							<td class="course_price"><p>87:-</p></td>
+    						</tr>
+    						<tr>
+    							<td class="course_type"><p>Local</p></td>
+    							<td class="course_description"><p>H&auml;llstekt h&ouml;grev med rostad skocka, r&ouml;dvinssky &amp; bakad purjo</p></td>
+    							<td class="course_price"><p>87:-</p></td>
+    						</tr>
+    						<tr>
+    							<td class="course_type"><p>World Wide</p></td>
+    							<td class="course_description"><p>Honung &amp; citronglacerad kyckling med soyarostade mor&ouml;tter</p></td>
+    							<td class="course_price"><p>87:-</p></td>
+    						</tr>
+    					</table>
+    
+    			    </div>
+    			
+    		    <div id="tuesday">
+    				<h3>
+    					Tisdag
+    				</h3>
+    					<table>
+    						<tr>
+    							<td class="course_type"><p>Green (Veg)</p></td>
+    							<td class="course_description"><p>Fylld portabello med salladsk&aring;l &amp; hoisins&aring;s</p></td>
+    							<td class="course_price"><p>87:-</p></td>
+    						</tr>
+    						<tr>
+    							<td class="course_type"><p>Local</p></td>
+    							<td class="course_description"><p>&Aring;ngad torsk med brynt sm&ouml;rbuljong, varmr&ouml;kt fl&auml;sk &amp; hackat &auml;gg</p></td>
+    							<td class="course_price"><p>87:-</p></td>
+    						</tr>
+    						<tr>
+    							<td class="course_type"><p>World Wide</p></td>
+    							<td class="course_description"><p>Fl&auml;skbog med curry, lime, jordn&ouml;tter, &auml;pple &amp; chili</p></td>
+    							<td class="course_price"><p>87:-</p></td>
+    						</tr>
+    						
+    						
+    					</table>
+    			</div>
+    
+    		    <div id="wednesday">
+    				<h3>
+    					Onsdag
+    				</h3>
+    					<table>
+    						<tr>
+    							<td class="course_type"><p>Green (Veg)</p></td>
+    							<td class="course_description"><p>Rostad spetsk&aring;l med potpur&eacute;, brynt sm&ouml;r, hasseln&ouml;tter &amp; lingon</p></td>
+    							<td class="course_price"><p>87:-</p></td>
+    						</tr>
+    						<tr>
+    							<td class="course_type"><p>Local</p></td>
+    							<td class="course_description"><p>Pannbiff med &ouml;lbr&auml;sserad l&ouml;k, lingon, sky &amp; potatis</p></td>
+    							<td class="course_price"><p>87:-</p></td>
+    						</tr>
+    						<tr>
+    							<td class="course_type"><p>World Wide</p></td>
+    							<td class="course_description"><p>Bakad fisk med wasabimajo, nudlar, packchoi &amp; sesamfr&ouml;</p></td>
+    							<td class="course_price"><p>87:-</p></td>
+    						</tr>
+    						
+    						
+    					</table>
+    
+                </div>
+                
+    	        <div id="thursday">
+    				<h3>
+    					Torsdag
+    				</h3>
+    				<table>
+    						<tr>
+    							<td class="course_type"><p>Green (Veg)</p></td>
+    							<td class="course_description"><p>Shakshuka med tomat, kik&auml;rter &amp; &auml;gg</p></td>
+    							<td class="course_price"><p>87:-</p></td>
+    						</tr>
+    						<tr>
+    							<td class="course_type"><p>Local</p></td>
+    							<td class="course_description"><p>&Auml;rtsoppa med tillbeh&ouml;r, pannkaka &amp; Sylt</p></td>
+    							<td class="course_price"><p>87:-</p></td>
+    						</tr>
+    						<tr>
+    							<td class="course_type"><p>World Wide</p></td>
+    							<td class="course_description"><p>Panerat fl&auml;sk med r&ouml;kt yoghurt &amp; rattatouille</p></td>
+    							<td class="course_price"><p>87:-</p></td>
+    						</tr>
+    						
+    						
+    					</table>
+    			</div>
+    			
+    			<div id="friday">
+    				<h3>
+    					Fredag
+    				</h3>
+    				<table>
+    						<tr>
+    							<td class="course_type"><p>Green (Veg)</p></td>
+    							<td class="course_description"><p>Svampsoppa med bakad skocka, l&ouml;k &amp; cheddartoast</p></td>
+    							<td class="course_price"><p>87:-</p></td>
+    						</tr>
+    						<tr>
+    							<td class="course_type"><p>Local</p></td>
+    							<td class="course_description"><p>Krispig fl&auml;sksida med r&ouml;dk&aring;l, sockerstekt potatisar &amp; sky</p></td>
+    							<td class="course_price"><p>87:-</p></td>
+    						</tr>
+    						<tr>
+    							<td class="course_type"><p>World Wide</p></td>
+    							<td class="course_description"><p>Kycklingsteak med cesarkr&auml;m, grillad spetsk&aring;l &amp; grana padano</p></td>
+    							<td class="course_price"><p>87:-</p></td>
+    						</tr>
+    						
+    						
+    					</table>
+    		    </div>
+
+		    </section>
+
+		</div>
+
+	</div>
+
+</div>
+
+<footer>
+
+    <div class="snippet_area snippet_area_footer" data-snippetarea="footer">
+	<div class="five columns text_synced five_text_synced">
+		<div class="column column0 text_synced" data-snippet="19"><h2>&Ouml;ppettider</h2>
+<p><strong>M&aring;ndag - fredag</strong><br />Caf&eacute; 8.00 - 15.00<br />Frukost 8.00 -10.00<br />Lunch&nbsp;11.15 - 13.30<br /><em>&Ouml;vriga tider efter &ouml;verenskommelse.</em></p></div>
+		<div class="column column1 text_synced" data-snippet="46"><a href="http://matovinslottsparken.se" target="_blank" class="sf_image sf_image_top"><img src="http://static1.snowfire.io/main/image/resize?file=accounts%2F15743%2Ffiles%2F103.jpeg&t=oybh1c&method=crop&crop%5Bx%5D=0&crop%5By%5D=0&crop%5Bwidth%5D=150&crop%5Bheight%5D=75&max_width=150" alt=""  /></a></div>
+		<div class="column column2 text_synced" data-snippet="45"><a href="http://smarkakok.se" target="_blank" class="sf_image sf_image_top"><img src="http://static1.snowfire.io/main/image/resize?file=accounts%2F15743%2Ffiles%2F107.jpg&t=oybh6y&method=crop&crop%5Bx%5D=0&crop%5By%5D=0&crop%5Bwidth%5D=150&crop%5Bheight%5D=75&max_width=150" alt=""  /></a></div>
+		<div class="column column3 text_synced" data-snippet="44"><a href="http://restaurangp2.se" target="_blank" class="sf_image sf_image_top"><img src="http://static1.snowfire.io/main/image/resize?file=accounts%2F15743%2Ffiles%2F106.jpg&t=oybh6x&method=crop&crop%5Bx%5D=0&crop%5By%5D=0&crop%5Bwidth%5D=150&crop%5Bheight%5D=75&max_width=150" alt=""  /></a></div>
+		<div class="column column4 text_synced" data-snippet="47"><a href="http://cafelive.se" target="_blank" class="sf_image sf_image_left"><img src="http://static1.snowfire.io/main/image/resize?file=accounts%2F15743%2Ffiles%2F108.jpg&t=oybh6z&method=crop&crop%5Bx%5D=0&crop%5By%5D=0&crop%5Bwidth%5D=150&crop%5Bheight%5D=75&max_width=150" alt=""  /></a></div>
+	</div>
+	<div class="one columns text_synced one_text_synced">
+		<div class="column column0 text_synced" data-snippet="23"><p style="text-align: center;">Restaurang Edison, Emdalav&auml;gen 6B Lund<br />Restaurangen 046-501 02&nbsp;- K&ouml;ket 0723-94 69 10&nbsp;</p>
+<p>&nbsp;</p></div>
+	</div>
+</div>
+
+
+    <div class="container">
+        <div id="powered_by">
+            <a href="http://snowfire.net" target="_blank">
+                <img src="/images/themes/snowfire-powered.svg" alt="Powered by Snowfire">
+            </a>
+        </div>
+    </div>
+</footer>
+
+<!-- ### -->
+
+	<!-- Vars -->
+	<script>
+		var site_path = 'http://restaurangedison.se/';
+		var account_path = '/accounts/15743';
+	</script>
+
+	<!--[if gte IE 8]><!-->
+	<!-- Included JS Files -->
+    <script type="text/javascript" src="/themes/original/public/js/foundation/foundation.min.js?t=mzcklx"></script>
+	<script type="text/javascript" src="/themes/original/public/js/vendor/responsive_nav/nav.js?t=n1ie5t"></script>
+
+    <!-- Fancybox -->
+	<link rel="stylesheet" type="text/css" media="all" href="/themes/original/public/js/vendor/fancybox/jquery.fancybox.css?t=mzcklx" />
+	<script type="text/javascript" src="/themes/original/public/js/vendor/fancybox/jquery.fancybox.pack.js?t=mzcklx"></script>
+
+	<!-- Flexslider -->
+	<script type="text/javascript" src="/themes/inspire/public/js/vendor/flexslider/jquery.flexslider-min.js?t=npo60y"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="/themes/inspire/public/js/vendor/flexslider/flexslider.css?t=npo60y" />
+
+	<!-- Selectboxit -->
+	<script type="text/javascript" src="/themes/inspire/public/js/vendor/selectboxit/jquery-ui.min.js?t=of8pg5"></script>
+	<script type="text/javascript" src="/themes/original/public/js/vendor/selectboxit/jquery.selectBoxIt.js?t=mzcklx"></script>
+
+	<!-- JS -->
+  	<script type="text/javascript" src="/.translated-files/sv_SE/public_html/themes/inspire/public/js/inspire.js?t=pglhyr"></script>
+	<!--<![endif]-->
+
+	<!-- Bootstrap -->
+	<script type="text/javascript" src="/.translated-files/sv_SE/public_html/themes/inspire/public/js/bootstrap.min.js?t=nlgcfd"></script>
+
+	<!-- Magnific popup -->
+	<script type="text/javascript" src="/.translated-files/sv_SE/public_html/themes/inspire/public/js/vendor/magnific-popup/jquery.magnific-popup.min.js?t=nty7ud"></script>
+
+  	
+<script type="text/javascript">
+var Cart = {"items":[],"products_sum":0,"products_sum_with_vat":0,"products_sum_without_vat":0,"tax_total":0,"total":0,"available_shipping":[],"shipping":null,"discounted_shipping_cost":null,"shipping_cost_discounted":false,"taxes":{"1":{"name":"Moms","rate":"25.00","rate_int":25,"total":0}},"display_price_with_vat":true,"sum_discount_saved":0,"discount":null,"discount_entered":null,"payment_provider_cost":0,"payment_provider_cost_without_tax":0,"region":{"id":"1","name":"Sweden","iso3166":"SE","currency":"SEK","group":"Europe","subgroup":"Northern Europe","is_origin":null,"eu":null,"rest_of_world":"0","deleted":"0"},"currency":{"symbol":"Skr","suffix":true,"name":"Swedish Krona","symbol_native":"kr","decimal_digits":2,"rounding":0,"code":"SEK","name_plural":"Swedish kronor"},"payment_provider_id":"1","decimals":2};
+</script><script type="text/javascript" src="/js/obfuscate.js?t=mbmo9q"></script>
+<script type="text/javascript" src="/js/handlebars-1.0.rc.1.min.js?t=mkdbdy"></script>
+<script type="text/javascript" src="/js/accounting.min.js?t=mlen21"></script>
+<script type="text/javascript" src="/.translated-files/sv_SE/public_html/modules/shop/js/shop.js?t=pe4xkh"></script>
+<script type="text/javascript" src="/.translated-files/sv_SE/public_html/modules/shop/js/cart.js?t=o438q8"></script>
+
+  	<script type="text/javascript" src="https://d29ly7uq16xz5t.cloudfront.net/editor/dist/15743/js/app.js?t=1507033472"></script>
+
+	
+	
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"9a2031416e","applicationID":"3274463","transactionName":"ZQdSZkFYCkJSB0VeC1xNZUBaFg1fVwFJGRRaEg==","queueTime":0,"applicationTime":254,"ttGuid":"","agentToken":"","userAttributes":"","errorBeacon":"bam.nr-data.net","agent":""}</script></body>
+</html>
