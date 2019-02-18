@@ -11,7 +11,7 @@ const places = [
 const getMenusForDay = (menus, date) => menus.map(p => ({ ...p, menu: p.menu[date.getDay() - 1] }));
 
 module.exports = {
-  menus: async () => {
+  menus: async (when) => {
     const menus = [];
     for (const place of places) {
         const { name, url, parse, raw } = require(`./places/${place}`);
@@ -21,7 +21,7 @@ module.exports = {
         const menu = await parse(data);
         menus.push({ name, url, menu });
     }
-    const today = getMenusForDay(menus, new Date());
+    const today = getMenusForDay(menus, when);
     return today;
   },
   format: (menus, reactions) => menus.map((m, i) => `
