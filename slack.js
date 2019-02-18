@@ -11,9 +11,7 @@ const web = new WebClient(token);
 rtm.start();
 
 rtm.on('message', async (message) => {
-  if (message.text !== '!lunch' && (message.subtype && message.subtype === 'bot_message' || !message.subtype && message.user === rtm.activeUserId)) {
-    return;
-  }
+  if (message.text !== '!lunch') return;
 
   const lunches = await menus();
   const msg = await web.chat.postMessage({ channel: message.channel, text: format(lunches, reactions) });
