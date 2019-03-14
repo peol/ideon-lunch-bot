@@ -15,11 +15,16 @@ module.exports = {
     const menus = [];
     for (const place of places) {
         const { name, url, parse, raw } = require(`./places/${place}`);
-        //let data = await request(url);
-        let data = readFileSync(`test/${place}.html`, 'utf-8');
-        if (!raw) data = parseHTML(data);
-        const menu = await parse(data);
-        menus.push({ name, url, menu });
+        try {
+            console.log('fetching', name);
+            let data = await request({ uri: url, timeout: 5000 });
+            //let data = readFileSync(`test/${place}.html`, 'utf-8');
+            if (!raw) data = parseHTML(data);
+            const menu = await parse(data);
+            menus.push({ name, url, menu });
+        } catch(e) {
+            console.log('failed to fetch', name);
+        }
     }
     const filtered = getMenusForDay(menus, when);
     return filtered;
