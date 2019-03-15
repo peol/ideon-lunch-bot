@@ -1,6 +1,6 @@
 const { RTMClient, WebClient } = require('@slack/client');
 
-const { menus, format } = require('./lunches');
+const { menus, format, formatOne } = require('./lunches');
 
 const DAY = 24 * 60 * 60 * 1000;
 const reactions = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
@@ -12,6 +12,7 @@ const web = new WebClient(token);
 rtm.start();
 
 rtm.on('message', async (message) => {
+  if (!message.text) return;
   const parts = message.text.split(' ');
   if (parts[0] !== '!lunch') return;
   let when = new Date();
@@ -23,14 +24,16 @@ rtm.on('message', async (message) => {
   }
 
   const lunches = await menus(when);
-  const msg = await web.chat.postMessage({ channel: message.channel, text: `
-    Lunch alternatives for ${when.toISOString().split('T')[0]} — \`!lunch today/tomorrow/yesterday\`
-
-    ${format(lunches, reactions) }
+  const parentMsg = await web.chat.postMessage({ channel: message.channel, text: `
+Lunch alternatives for ${when.toISOString().split('T')[0]} — \`!lunch today/tomorrow/yesterday\`. See thread for menu alternatives.
 ` });
   let idx = 0;
-  for (const item in lunches) {
-    await web.reactions.add({ channel: message.channel, timestamp: msg.ts, name: reactions[idx] });
+  const text = format(lunches, reactions);
+  await web.chat.postMessage({ channel: message.channel, thread_ts: parentMsg.message.ts, text });
+  for (const item of lunches) {
+    //const text = formatOne(item, reactions[idx]);
+    //await web.chat.postMessage({ channel: message.channel, thread_ts: parentMsg.message.ts, text });
+    await web.reactions.add({ channel: message.channel, timestamp: parentMsg.message.ts, name: reactions[idx] });
     idx += 1;
   }
 

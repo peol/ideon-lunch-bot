@@ -8,7 +8,16 @@ const places = [
     'kryddhyllan',
 ];
 
-const getMenusForDay = (menus, date) => menus.map(p => ({ ...p, menu: p.menu[date.getDay() - 1] }));
+const getMenusForDay = (menus, date) => {
+  return menus.map(p => ({ ...p, menu: p.menu[date.getUTCDay() - 1] }));
+};
+
+const formatOne = (item, reaction) => `
+:${reaction}: *${item.name}* — ${item.url}
+${item.menu.map(e => `*${e.type}:* ${e.dish} (${e.price || '??'}:-)`).join('\n')}
+`;
+
+const format = (menus, reactions) => menus.map((m, i) => formatOne(m, reactions[i])).join('\n\n');
 
 module.exports = {
   menus: async (when) => {
@@ -29,14 +38,15 @@ module.exports = {
     const filtered = getMenusForDay(menus, when);
     return filtered;
   },
-  format: (menus, reactions) => menus.map((m, i) => `
-:${reactions[i]}: *${m.name}* — ${m.url}
-${m.menu.map(e => `*${e.type}:* ${e.dish} (${e.price || '??'}:-)
-`).join('\n')}`).join('\n\n')
+  format,
+  formatOne,
 };
 
 if (process.argv.indexOf('debug') > -1) {
   (async () => {
-    console.log(await module.exports.menus(new Date(Date.now() + 24 * 60 * 60 * 1000)));
+    const reactions = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+    const menus = await module.exports.menus(new Date());
+    //console.log(formatOne(menus[0], reactions[0]));
+    console.log(format(menus, reactions));
   })();
 }
