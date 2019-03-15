@@ -34,6 +34,7 @@ Lunch alternatives for ${when.toISOString().split('T')[0]} — \`!lunch today/to
     //const text = formatOne(item, reactions[idx]);
     //await web.chat.postMessage({ channel: message.channel, thread_ts: parentMsg.message.ts, text });
     await web.reactions.add({ channel: message.channel, timestamp: parentMsg.message.ts, name: reactions[idx] });
+    await new Promise(resolve => setTimeout(resolve, 2000));
     idx += 1;
   }
 
