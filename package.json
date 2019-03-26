@@ -3,15 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "slack.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Andrée Hansson <peolanha@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "@slack/client": "4.9.0",
-    "he": "1.2.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "he": "^1.2.0",
     "node-html-parser": "1.1.12",
     "request": "2.88.0",
     "request-promise-native": "1.0.7"

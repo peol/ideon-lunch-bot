@@ -1,52 +1,84 @@
 const { parse: parseHTML } = require('node-html-parser');
-const { readFileSync } = require('fs');
+const { mkdirSync, readdirSync, readFileSync, writeFileSync } = require('fs');
+const { dirname } = require('path');
 const request = require('request-promise-native');
 
-const places = [
-    'qlik', 'edison', 'bricks',
-    'hojdpunkten', 'hilda', 'bryggan',
-    'kryddhyllan',
-];
+const RESTAURANTS_PATH = `${__dirname}/restaurants`;
+const CACHE_PATH = `${__dirname}/cache`;
+const RESTAURANTS = ['qlik', 'edison', 'bricks', 'hilda', 'hojdpunkten', 'kryddhyllan'];
+// build list of restaurants from disk:
+// const RESTAURANTS = readdirSync(RESTAURANTS_PATH).map(f => f.split('.')[0]).filter(f => f.indexOf('_disabled') === -1);
 
-const getMenusForDay = (menus, date) => {
-  return menus.filter(p => p).map(p => ({ ...p, menu: p.menu[date.getUTCDay() - 1] }));
-};
+// helper to create folders without throwing errors:
+const createFolder = (path) => { try { mkdirSync(path); } catch(e) {} };
 
-const formatOne = (item, reaction) => `
-:${reaction}: *${item.name}* — ${item.url}
-${item.menu.map(e => `*${e.type}:* ${e.dish} (${e.price || '??'}:-)`).join('\n')}
+// helper to read a restaurant cache from disk:
+const readRestaurantCache = (path) => {
+  createFolder(dirname(path));
+  let content = null;
+  try { content = readFileSync(path, 'utf-8'); } catch(e) {}
+  return content;
+} 
+
+// helper to write restaurant cache to disk:
+const writeRestaurantCache = (path, content) => writeFileSync(path, content);
+
+// formats a list of restaurants into markdown syntax:
+const format = (menus, dayIdx, reactions) => menus.map((m, i) => formatOne(m, dayIdx, reactions[i])).join('\n');
+
+// formats one restaurant into markdown syntax:
+const formatOne = (menu, dayIdx, reaction) => `
+:${reaction}: *${menu.name}* — ${menu.url}
+${menu.dishes[dayIdx].map(e => `*${e.type}:* ${e.dish} (${e.price || '??'}:-)`).join('\n')}
 `;
 
-const format = (menus, reactions) => menus.map((m, i) => formatOne(m, reactions[i])).join('\n\n');
+// create the cache folder, silently fail if it exists (or if it cannot be created...):
+createFolder(CACHE_PATH);
+
+// get a parsed menu for a restaurant:
+const getMenu = async (place) => {
+  const { name, url, parse, raw } = require(`${RESTAURANTS_PATH}/${place}`);
+  const cacheFile = `${CACHE_PATH}/${new Date().toISOString().split('T')[0]}/${place}.html`;
+  let data = readRestaurantCache(cacheFile);
+  if (!data) {
+    try {
+      console.log('fetching fresh:', name);
+      data = await request({ uri: url, timeout: 5000 });
+      //data = readFileSync(`${__dirname}/test/${place}.html`, 'utf-8');
+      writeRestaurantCache(cacheFile, data);
+    } catch(e) {
+      console.log('failed to fetch:', name);
+    }
+  } else {
+    console.log('found cached:', name);
+  }
+  if (!data) return null;
+  console.log('parsing:', name);
+  if (!raw) data = parseHTML(data);
+  return { name, url, dishes: await parse(data) };
+};
+
+// returns a list of restaurants and their week menus, filtering out any
+// restaurants which couldn't be found/fetched:
+const getMenus = async () => {
+  // fetch all restaurant menus in parallel:
+  const menus = await Promise.all(RESTAURANTS.map(getMenu));
+  // only return menus that could be parsed:
+  return menus.filter(p => p);
+};
 
 module.exports = {
-  menus: async (when) => {
-    const menus = await Promise.all(places.map(async (place) => {
-      const { name, url, parse, raw } = require(`./places/${place}`);
-      try {
-        console.log('fetching', name);
-        let data = await request({ uri: url, timeout: 5000 });
-        //let data = readFileSync(`test/${place}.html`, 'utf-8');
-        if (!raw) data = parseHTML(data);
-        const menu = await parse(data);
-        return { name, url, menu };
-      } catch(e) {
-        console.log('failed to fetch', name);
-        return null;
-      }
-    }));
-    const filtered = getMenusForDay(menus, when);
-    return filtered;
-  },
+  getMenus,
   format,
   formatOne,
 };
 
 if (process.argv.indexOf('debug') > -1) {
   (async () => {
-    const reactions = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
-    const menus = await module.exports.menus(new Date());
-    //console.log(formatOne(menus[0], reactions[0]));
-    console.log(format(menus, reactions));
+    const menus = await getMenus();
+    const day = new Date().getUTCDay() - 1;
+    //console.log(formatOne(menus[0], new Date().getUTCDay() - 1, 'reaction'));
+    //console.log(format(menus, 1, []));
+    console.log(format(menus, day, []));
   })();
 }
