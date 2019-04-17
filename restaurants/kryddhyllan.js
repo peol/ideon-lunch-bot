@@ -12,11 +12,15 @@ module.exports = {
       const isFirstOption = i % 3 === 0;
       if (isFirstOption) currentDay = i / 3;
       //console.log(isFirstOption, currentDay);
-      if (entries[currentDay]) entries[currentDay].push({
-        type: 'Dagens',
-        dish: entry.querySelector('.menu_title').rawText,
-        price: parseFloat(entry.querySelector('.menu_price').rawText),
-      });
+      if (entries[currentDay]) {
+        const title = entry.querySelector('.menu_title').rawText.trim();
+        const excerpt = (entry.querySelector('.menu_excerpt') || { rawText: ''}).rawText.trim();
+        entries[currentDay].push({
+          type: 'Dagens',
+          dish: `${title}${excerpt && ` ${excerpt}` || ''}`,
+          price: parseFloat(entry.querySelector('.menu_price').rawText),
+        });
+      }
     });
     return entries;
   },
