@@ -5,8 +5,12 @@ Slack bot for fetching lunch menus in the Ideon area and letting people vote on 
 Requires a Slack bot token together with a slash command to port 6445 if you want Slack integration.
 
 ```bash
+# run full app:
 npm i
 SLACK_TOKEN=xoxp-token node index
+## or to debug without slack:
+npm i
+node lunches debug
 ```
 
 ## Spec

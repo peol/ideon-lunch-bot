@@ -1,8 +1,8 @@
 const { decode } = require('he');
 
 module.exports = {
-  name: 'Höjdpunkten',
-  url: 'http://www.restauranghojdpunkten.se/index.php?page=Meny',
+  name: 'Smaka på Kina (f.k.a. Höjdpunkten)',
+  url: 'https://www.smakapakina.se/meny',
   parse: async (root) => {
     const entries = [[],[],[],[],[]];
     let currentDay = 0;

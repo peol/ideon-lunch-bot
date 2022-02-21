@@ -1,6 +1,6 @@
 const { decode } = require('he');
 
-const trim = e => e ? e.rawText.trim() : '';
+const trim = e => e ? e.text.trim() : '';
 
 module.exports = {
   name: 'Restaurang Edison',

@@ -7,11 +7,11 @@
   "author": "Andrée Hansson <peolanha@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@slack/client": "4.9.0",
+    "@slack/web-api": "^6.6.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "he": "^1.2.0",
-    "node-html-parser": "1.1.12",
+    "node-html-parser": "^5.2.0",
     "request": "2.88.0",
     "request-promise-native": "1.0.7"
   }

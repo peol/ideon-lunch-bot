@@ -4,7 +4,7 @@ const extractor = (e, selector, f = f => f) => f(decode(e.querySelector(selector
 
 module.exports = {
   name: 'Kryddhyllan',
-  url: 'https://www.ideon-restaurang.se/',
+  url: 'https://www.kryddhyllanilund.se/',
   parse: async (root) => {
     const entries = [[], [], [], [], []];
     let currentDay = 0;

@@ -5,7 +5,7 @@ const request = require('request-promise-native');
 
 const RESTAURANTS_PATH = `${__dirname}/restaurants`;
 const CACHE_PATH = `${__dirname}/cache`;
-const RESTAURANTS = ['qlik', 'edison', 'bricks', 'hilda', 'hojdpunkten', 'kryddhyllan'];
+const RESTAURANTS = ['qlik', 'edison', 'bricks', 'paolos',/*'hojdpunkten',*/ 'kryddhyllan'];
 // build list of restaurants from disk:
 // const RESTAURANTS = readdirSync(RESTAURANTS_PATH).map(f => f.split('.')[0]).filter(f => f.indexOf('_disabled') === -1);
 
