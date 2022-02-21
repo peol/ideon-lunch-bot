@@ -5,7 +5,7 @@ const request = require('request-promise-native');
 
 const RESTAURANTS_PATH = `${__dirname}/restaurants`;
 const CACHE_PATH = `${__dirname}/cache`;
-const RESTAURANTS = ['qlik', 'edison', 'bricks', 'paolos',/*'hojdpunkten',*/ 'kryddhyllan'];
+const RESTAURANTS = ['qlik', 'edison', 'bricks', 'kantin', 'thaiway', 'paolos',/*'hojdpunkten',*/ 'kryddhyllan'];
 // build list of restaurants from disk:
 // const RESTAURANTS = readdirSync(RESTAURANTS_PATH).map(f => f.split('.')[0]).filter(f => f.indexOf('_disabled') === -1);
 
@@ -43,11 +43,13 @@ const getMenu = async (place) => {
   if (!data) {
     try {
       console.log('fetching fresh:', name);
-      data = await request({ uri: url, timeout: 5000 });
+      data = await request({ uri: url, headers: {
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36',
+      }, timeout: 5000 });
       //data = readFileSync(`${__dirname}/test/${place}.html`, 'utf-8');
       writeRestaurantCache(cacheFile, data);
     } catch(e) {
-      console.log('failed to fetch:', name);
+      console.log('failed to fetch:', name, e);
     }
   } else {
     console.log('found cached:', name);

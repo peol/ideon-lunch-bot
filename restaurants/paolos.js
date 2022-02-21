@@ -1,6 +1,3 @@
-const { decode } = require('he');
-
-const trim = e => e ? e.text.trim() : '';
 const traverseSiblings = (elem, steps) => {
   let target = elem;
   let i = 0;
@@ -21,7 +18,8 @@ module.exports = {
     const startNodes = ['MÅNDAG', 'TISDAG', 'ONSDAG', 'TORSDAG', 'FREDAG'];
     dailies.querySelectorAll('p').forEach((p) => {
       const cleanText = p.text.replace(':', '').trim();
-      if (startNodes.indexOf(cleanText) > -1) {
+        // each day has 3 pizzas and 2 pastas
+        if (startNodes.indexOf(cleanText) > -1) {
         const daily = [];
         for (let i = 0; i < 3; i += 1) {
           daily.push({
@@ -38,7 +36,6 @@ module.exports = {
           });
         }
         entries.push(daily);
-        // each day has 3 pizzas and 2 pastas
       }
     });
     return entries;
