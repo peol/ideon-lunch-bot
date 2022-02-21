@@ -4,7 +4,7 @@ const extractor = (e, selector, f = f => f) => f(decode(e.querySelector(selector
 
 module.exports = {
   name: 'Qlik Restaurant',
-  url: 'https://smartakok.se/vara-kok/qlik/',
+  url: 'https://smartakok.se/vara-kok/qlik-english/',
   parse: async (root) => root.querySelectorAll('tbody').map((day, i) => day.querySelectorAll('.menu__day__type').map(d => ({
     type: extractor(d, '.menu__day__type__title'),
     dish: extractor(d, '.menu__day__type__dish'),
